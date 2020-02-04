@@ -1,0 +1,9 @@
+composer.phar
+
+/vendor/
+
+db.sql
+
+/app12
+
+/.vscode

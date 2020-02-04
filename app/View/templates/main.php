@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="css/main-76b66b5da2.css">
 </head>
 <body>
-    <?php include 'nav.php' ?>
     <?php include 'books.php' ?>
 
     <script src="js/description"></script>

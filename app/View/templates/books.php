@@ -2,9 +2,10 @@
     <h1 class="v-hidden">
         Книги
     </h1>
-<div class="items">
-    <?php include 'book.php' ?>
-</div>
+    <?php include 'nav.php' ?>
+    <div class="items">
+        <?php include 'book.php' ?>
+    </div>
 
     <dl class="meta">
         <div class="meta__item">

@@ -78,6 +78,7 @@ class BooksController
         $data['originalBooks'] = $originalBooks;
 
         $pdf = new Mpdf();
+        $pdf->SetAutoPageBreak(true);
         $pdf->WriteHtml(view('pdf/books', $data));
         return $pdf->output();
     }

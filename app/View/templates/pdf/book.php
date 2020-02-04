@@ -54,9 +54,6 @@
                             ?>
                         </span>
                     </div>
-                    <button type="button" class="button button_dark">
-                        Купить
-                    </button>
                 </div>
             </div>
         </div>

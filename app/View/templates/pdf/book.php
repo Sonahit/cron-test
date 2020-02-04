@@ -34,26 +34,9 @@
             <div>
                 <div class="entry__desc">
                     <p>
-                        <?php
-                        if (mb_strlen($description) > 200) {
-                            $short = mb_substr($description, 0, 200);
-                            printf('%s ...', $short);
-                        }
-                        ?>
-                    </p>
-                    <p
-                        <?php if (mb_strlen($description) > 200) {?>
-                            style="display: none;"
-                        <?php } ?>
-                    >
                         <?php print($description);?>
                     </p>
                 </div>
-                <?php if (mb_strlen($description) >= 200) { ?>
-                    <a href="#" class="link">
-                        Полное описание
-                    </a>
-                <?php }?>
                 <div class="entry__bar">
                     <div class="entry__price">
                         <span>

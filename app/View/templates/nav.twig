@@ -1,5 +1,5 @@
-<?php $sort = isset($_GET['sort']) ? $_GET['sort'] : 'price';?>
-<?php $direction = isset($_GET['direction']) ? $_GET['direction'] : 'desc';?>
+{% set sort = _get['sort'] is defined ? _get['sort'] : 'price' %}
+{% set direction = _get['direction'] is defined ? _get['direction'] : 'asc' %}
 
 <nav class="menu">
     <span class="menu__label">
@@ -12,11 +12,11 @@
                 href="#"
                 data-sort='price'
                 data-direction='asc'
-                <?php if ($direction === 'asc' and $sort === 'price') {?>
-                    class="link menu__link is-active"
-                <?php } else { ?>
-                    class="link menu__link"
-                <?php } ?>
+                {% if direction == 'asc' and sort == 'price' %}
+                class="link menu__link is-active"
+                {% else %}
+                class="link menu__link"
+                {% endif %}
             >
                 По цене ▲
             </a>
@@ -26,11 +26,11 @@
                 href="#"
                 data-sort='price'
                 data-direction='desc'
-                <?php if ($direction === 'desc' and $sort === 'price') {?>
-                    class="link menu__link is-active"
-                <?php } else { ?>
-                    class="link menu__link"
-                <?php } ?>
+                {% if direction == 'desc' and sort == 'price' %}
+                class="link menu__link is-active"
+                {% else %}
+                class="link menu__link"
+                {% endif %}
             >
                 По цене ▼
             </a>
@@ -40,11 +40,11 @@
                 href="#"
                 data-sort='author'
                 data-direction='asc'
-                <?php if ($direction === 'asc' and $sort === 'author') {?>
-                    class="link menu__link is-active"
-                <?php } else { ?>
-                    class="link menu__link"
-                <?php } ?>
+                {% if direction == 'asc' and sort == 'author' %}
+                class="link menu__link is-active"
+                {% else %}
+                class="link menu__link"
+                {% endif %}
             >
                 По автору ▲
             </a>
@@ -54,11 +54,11 @@
                 href="#"
                 data-sort='author'
                 data-direction='desc'
-                <?php if ($direction === 'desc' and $sort === 'author') {?>
-                    class="link menu__link is-active"
-                <?php } else { ?>
-                    class="link menu__link"
-                <?php } ?>
+                {% if direction == 'desc' and sort == 'author' %}
+                class="link menu__link is-active"
+                {% else %}
+                class="link menu__link"
+                {% endif %}
             >
                 По автору ▼
             </a>

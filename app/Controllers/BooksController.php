@@ -10,8 +10,9 @@ use \Mpdf\Mpdf;
 
 use function App\view;
 use function App\config;
+use function App\http_response;
 
-class BooksController
+class BooksController extends Controller
 {
     public function index(Request $request)
     {
@@ -25,6 +26,7 @@ class BooksController
 
         $data['books'] = $dataBooks;
         $data['originalBooks'] = $originalBooks;
+        $data['priceList'] = json_decode(http_response("https://api.exchangeratesapi.io/latest?base=RUB"));
 
         return view('main', $data);
     }

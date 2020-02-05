@@ -1,0 +1,60 @@
+{% set books = originalBooks ?: [] %}
+{% set foreignCurrency = foreignCurrency == 'RUB' ? 'EUR' : foreignCurrency %}
+
+{% for bookInfo in books %}
+  {% set bookName = bookInfo['book']['name'] %}
+  {% set price = bookInfo['book']['price'] * 1 %}
+  {% set description = bookInfo['book']['description'] %}
+  {% set image = bookInfo['book']['image'] %}
+  {% set genreName = bookInfo['genre']['name'] %}
+  {% set year = bookInfo['book']['year'] %}
+  {% set authorName = bookInfo['author']['name'] %}
+
+  <article class="entry">
+      <header class="entry__header">
+          <h2 class="heading-2 entry__title">
+              {{ bookName }}
+          </h2>
+          <div class="entry__meta">
+              <span>
+                  {{ authorName }}
+              </span>
+              <span>
+                  {{ year }}
+              </span>
+              <span>
+                  {{ genreName }}
+              </span>
+          </div>
+      </header>
+      <div class="entry__main">
+          <div class="entry__image">
+              <img src="img/books/{{ image }}" alt="{{ bookName }}">
+          </div>
+          <div>
+              <div class="entry__desc">
+                  <p>
+                    {{ description }}
+                  </p>
+              </div>
+              <div class="entry__bar">
+                  <div class="entry__price">
+                      <span>
+                          {{ price|round(0, 'floor') }}?
+                      </span>
+                      <span>
+                          {% set foreignPrice = attribute(priceList.rates, foreignCurrency) %}
+                          {% set price = (price * foreignPrice)|round(2, 'floor') %}
+                          {% set symbol = currencyData[foreignCurrency] is defined ? currencyData[foreignCurrency]['symbol'] : foreignCurrency %}
+                          {# //€ #}
+                          {{ price }} {{ symbol }}
+                      </span>
+                  </div>
+                  <button type="button" class="button button_dark">
+                      ??????
+                  </button>
+              </div>
+          </div>
+      </div>
+  </article>
+{% endfor %}

@@ -1,0 +1,46 @@
+<div class="wrap">
+    <h1 class="v-hidden">
+        Книги
+    </h1>
+    {% include "nav.twig" %}
+    <div class="items">
+        {% include "book.twig" with {'books' : books, 'originalBooks' : originalBooks} %}
+    </div>
+
+    <dl class="meta">
+        <div class="meta__item">
+            <dt>
+                Всего книг:
+            </dt>
+            <dd>
+               {{ originalBooks|length }}
+            </dd>
+        </div>
+        <div class="meta__item">
+            <dt>
+                Средняя стоимость:
+            </dt>
+            <dd>
+              {% set price = originalBooks|reduce((price, bookInfo) => price + bookInfo['book']['price'], 0 )%}
+              {{ (price / originalBooks|length)|round(0, 'floor') }} ₽
+            </dd>
+        </div>
+        <div class="meta__item">
+            <dt>
+                Публикации:
+            </dt>
+            <dd>
+                {% set minDate = originalBooks|reduce((date, bookInfo) => min(date, bookInfo['book']['year']), originalBooks[0]['book']['year']) %}
+                {% set maxDate = originalBooks|reduce((date, bookInfo) => max(date, bookInfo['book']['year']), originalBooks[0]['book']['year']) %}
+
+                  {{ minDate }} - {{ maxDate }}
+            </dd>
+        </div>
+    </dl>
+    <form class="form" action="/pdf">
+        <input type="hidden" name="date" value="02.02.2020">
+        <button type="submit" class="button">
+            Создать PDF
+        </button>
+    </form>
+</div>

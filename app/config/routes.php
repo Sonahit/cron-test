@@ -7,5 +7,8 @@ return [
     ],
     '/pdf' => [
         'GET' => 'BooksController{pdf}'
-    ]
+    ],
+    '/checkout' => [
+        'GET' => 'CheckoutController{index}'
+    ],
 ];

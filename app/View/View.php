@@ -2,9 +2,9 @@
 
 namespace App\View;
 
-use App\Exceptions\TemplateNotFoundException;
-
 use function App\viewsPath;
+use \Twig\Environment;
+use \Twig\Extension\DebugExtension;
 
 class View
 {
@@ -12,18 +12,13 @@ class View
 
     public function render(string $viewName, array $data = [])
     {
-        $viewPath = viewsPath('templates') . '/' .  $viewName . '.php';
-        ob_start();
-        foreach ($data as $k => $v) {
-            ${"$k"} = $v;
-        }
-
-        if (file_exists($viewPath)) {
-            include($viewPath);
-        } else {
-            throw new TemplateNotFoundException("Template not found {$viewPath}");
-        }
-        return ob_get_clean();
+        $viewName = $viewName . '.twig';
+        $loader = new Loader(viewsPath('templates'));
+        $twig = new Environment($loader);
+        $twig->addGlobal('_session', $_SESSION);
+        $twig->addGlobal('_post', $_POST);
+        $twig->addGlobal('_get', $_GET);
+        return $twig->render($viewName, $data);
     }
 
     public function __set($k, $v)

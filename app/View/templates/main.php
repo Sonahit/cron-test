@@ -13,7 +13,7 @@
 <body>
     <?php include 'books.php' ?>
 
-    <script src="js/description"></script>
+    <script src="js/description.js"></script>
 
 </body>
 </html>

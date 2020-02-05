@@ -36,13 +36,13 @@ class BooksController
         $direction = $request->get('direction') ?: 'asc';
         $limit = (int)$request->get('limit') ?: 3;
         $books = Books::getBooks();
-        $dataBooks = $books['book'];
+        $dataBooks = [];
 
         foreach ($books as $book) {
             $index = count($dataBooks);
             $dataBooks[$index]['book'] = $book;
-            $author = Authors::getById($book['author_id']);
-            $genre = Genres::getById($book['genre_id']);
+            $author = Authors::getById((int)$book['author_id']);
+            $genre = Genres::getById((int)$book['genre_id']);
             $dataBooks[$index]['author'] = $author;
             $dataBooks[$index]['genre'] = $genre;
         }
@@ -55,9 +55,9 @@ class BooksController
                 ? $a['book']['price'] > $b['book']['price']
                 : $a['book']['price'] < $b['book']['price'];
             } elseif ($sort === 'author') {
-                return $direction === 'asc'
-                ? strcmp($a['author']['price'], $b['author']['price'])
-                : ! strcmp($a['author']['price'], $b['author']['price']);
+                    return $direction === 'asc'
+                ? strcmp($a['author']['name'], $b['author']['name'])
+                : -strcmp($a['author']['name'], $b['author']['name']);
             }
             return 0;
         });

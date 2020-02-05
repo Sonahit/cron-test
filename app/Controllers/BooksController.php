@@ -36,16 +36,16 @@ class BooksController
         $direction = $request->get('direction') ?: 'asc';
         $limit = (int)$request->get('limit') ?: 3;
         $books = Books::getBooks();
-        $dataBooks = [];
 
-        foreach ($books as $book) {
-            $index = count($dataBooks);
-            $dataBooks[$index]['book'] = $book;
+        $dataBooks = array_map(function ($book) {
+            $bookInfo = [];
+            $bookInfo['book'] = $book;
             $author = Authors::getById((int)$book['author_id']);
             $genre = Genres::getById((int)$book['genre_id']);
-            $dataBooks[$index]['author'] = $author;
-            $dataBooks[$index]['genre'] = $genre;
-        }
+            $bookInfo['author'] = $author;
+            $bookInfo['genre'] = $genre;
+            return $bookInfo;
+        }, $books);
 
         $originalBooks = $dataBooks;
 
